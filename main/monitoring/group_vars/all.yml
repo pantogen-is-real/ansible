@@ -1,0 +1,10 @@
+---
+influxdb_org: plv
+
+influxdb_bucket: testbucket
+
+influxdb_user: influxuser1
+
+influxdb_password: 12345678
+
+...

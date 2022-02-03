@@ -1,0 +1,5 @@
+---
+- hosts: pre_test
+  roles:
+    - grafana
+...

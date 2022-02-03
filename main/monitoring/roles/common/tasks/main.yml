@@ -1,0 +1,25 @@
+---
+  - name: update host
+    apt:
+     upgrade: yes
+     update_cache: yes
+     cache_valid_time: 86400
+
+  - name: update hostname
+    hostname:
+      name: '{{ inventory_hostname }}'
+
+  - name: update hosts
+    template:
+      src: hosts.j2
+      dest: /etc/hosts
+
+  - name: allow sudo without password for sudo group
+   # become: yes
+    lineinfile:
+     path: /etc/sudoers
+     state: present
+     regexp: '^%sudo\s+ALL='
+     line: '%sudo ALL=(ALL:ALL) NOPASSWD: ALL'
+     validate: /usr/sbin/visudo -cf %s
+...

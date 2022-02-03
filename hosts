@@ -1,0 +1,8 @@
+[all:vars]
+#ansible_user=root
+
+[test]
+ansible-test ansible_host=192.168.7.12
+
+[pre_test]
+pre-test1 ansible_host=192.168.7.14
