@@ -1,0 +1,13 @@
+---
+- name: update ssh keys for root
+  authorized_key:
+    user: root
+    state: present
+    exclusive: true
+    key: "{{ root_ssh_keys | join('\n') }}"
+- name: install fail2ban
+  apt:
+    name: fail2ban
+    state: present
+    update_cache: true
+...

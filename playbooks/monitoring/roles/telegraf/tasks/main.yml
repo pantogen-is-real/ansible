@@ -1,0 +1,37 @@
+---
+
+#- name: import repository key
+#  apt-key:
+#   url: https://repos.influxdata.com/influxdb.key
+#   state: present
+
+- name: add repository
+  apt_repository:
+    repo: 'deb https://repos.influxdata.com/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable'
+    state: present
+
+- name: install telegraf
+  apt:
+   name: "telegraf{% if telegraf_version is defined %}={{ telegraf_version }}{% endif %}"
+   state: present
+   update_cache: true
+
+- name: get token
+  shell:  influx auth list |  awk 'NR==2 {print $4}' 
+  register: TOKEN
+
+- name: token to variable
+  set_fact:
+      influx_token: "{{ TOKEN.stdout }}"
+
+- debug:
+   var: influx_token
+
+- name: update config
+  template:
+    src: telegraf.conf.j2
+    dest: /etc/telegraf/telegraf.conf
+  notify:
+    - restart telegraf 
+
+...

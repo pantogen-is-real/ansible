@@ -1,0 +1,36 @@
+---
+- name: import repository key
+  apt_key:
+    url: https://repos.influxdata.com/influxdb.key
+    state: present
+
+- name: add repository
+  apt_repository:
+    repo: 'deb https://repos.influxdata.com/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable'
+    state: present
+
+- name: install influxdb
+  apt:
+    name: influxdb2
+    state: present
+
+- name: start influxdb
+  command: systemctl start influxd
+
+- name: Setup influxdb2
+  command: influx setup  --org {{ influxdb_org }} --bucket {{ influxdb_bucket }} --username {{ influxdb_user }} --password {{ influxdb_password }} --force --skip-verify
+  ignore_errors: yes 
+
+- name: create influxdb access token
+  command: influx auth create --org {{ influxdb_org }} --all-access
+
+ # command: cat "{{ inventory_hostname }}' --org '{{ influxdb_org }}' --bucket '{{ influxdb_bucket }}' {{ influxdb_user }} {{ influxdb_password }}"  >>  /etc/test   
+# ignore_errors: true
+
+#- name: update config
+#  template:
+#    src: influxdb.conf.j2
+#    dest: /etc/influxdb/influxdb.conf
+#  notify:
+#    - restart influxdb
+...

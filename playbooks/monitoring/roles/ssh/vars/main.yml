@@ -1,0 +1,8 @@
+---
+root_ssh_keys:
+  # ansible
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDNgk2z1Uhr8Wq8pMWSV82gVSE7yy842OJpzY8nacRRIuGLsaVHwFXHOfo3faOOgoGz/puq9xCKxLIjDShPppyC2XuLzAqKxRUQZCS49S9fh8byvggVSp2udzalv3X0sDXvY2ym8r7Mtppmrg1CHlirm5tt70Ip923iJPCzRnemScYbDqhBqmSXPZ+CXw2yhUvVmNfj>
+
+  # m.veprev
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDiRCR5BeQeXNKDU+d6oDgZxH3NgSiUAHiQjKcx1+3UPojtc9KMvjxakTulECS/rtq+CO5mR8LbxZnpTt2Wq1iarZ97HNkcyGvorKhCoy6m7ULuUtNhvcWlv7g7faGPJUKYBUebxJY2GuWKSDJdB/Au691UKXyRCCpWCTMXjauFc+h62AQbYhLVwOnb/0Y+BLe8kbAqnvbxK1twooTdDykKYeGKy0qRQubPPADRyzdG+iYLWKGCDgwiAO/kP71LJrvNyqWoFXrsjjnRcNkGEMYjT6mi03Lw0k13yn/cR7yzxgID6cxchTOs2KExZx0n8qXJcPKo8/9+3yvG7qODfzTr office\maksim.veprev@veprev
+...
