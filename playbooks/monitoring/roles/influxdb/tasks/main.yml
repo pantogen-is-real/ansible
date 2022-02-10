@@ -14,8 +14,10 @@
     name: influxdb2
     state: present
 
-- name: Influx started
-  command: systemctl start influxd
+- name: Influx restarted 
+  service:
+    name: influxdb2
+    state: restarted
 
 - name: Influx configured
   command: influx setup  --org {{ influxdb_org }} --bucket {{ influxdb_bucket }} --username {{ influxdb_user }} --password {{ influxdb_password }} --force --skip-verify
