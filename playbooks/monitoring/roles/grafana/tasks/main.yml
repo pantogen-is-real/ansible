@@ -1,54 +1,54 @@
 ---
-- name: ensure https transport presents
+- name: Https transport present
   apt:
     pkg:
       - apt-transport-https
       - software-properties-common
     state: present
 
-- name: Add a grafana signing key
+- name: Grafana's repository key present
   apt_key:
     url: https://packages.grafana.com/gpg.key
     state: present
 
-- name: Add grafana specified repository into sources list
+- name: Grafana's repository present
   apt_repository:
     repo: deb https://packages.grafana.com/oss/deb stable main
     state: present
     update_cache: true
 
-- name: Install grafana
+- name: Grafana present
   apt:
     name: grafana
     state: present
 
-- name: Get token
+- name: Influx token captured
   shell:  influx auth list |  awk 'NR==2 {print $4}'
   register: TOKEN
 
-- name: Token to variable
+- name: Influx token added to variables
   set_fact:
       influx_token: "{{ TOKEN.stdout }}"
 
 - debug:
    var: influx_token
 
-- name: Prep provisoning datasources
+- name: Datasources configured
   template:
     src: datasource.yaml.j2
     dest: "/etc/grafana/provisioning/datasources/datasource.yaml"
 
-- name: Prep dashboard provider
+- name: Dashboard provider configured
   template:
     src: provider.yaml.j2
     dest: "/etc/grafana/provisioning/dashboards/provider.yaml"
 
-- name: Create dashboards directory if it does not exist
+- name: Dashboard's directory insist
   ansible.builtin.file:
     path: /var/lib/grafana/dashboards/
     state: directory
 
-- name: Prep provisioning dashboard
+- name: Provisioning dashboard configured
   template:
    src: dashboard.json.j2
    dest: "/var/lib/grafana/dashboards/dashboard.json"
